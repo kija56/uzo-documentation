@@ -3,9 +3,9 @@ define({ "api": [
   {
     "type": "POST",
     "url": "/api/v1/users",
-    "title": "Create an account",
-    "name": "Create_an_account",
-    "description": "<p>An admin can create an account</p>",
+    "title": "Create an user",
+    "name": "Create_an_user",
+    "description": "<p>An admin can create a user</p>",
     "group": "User",
     "version": "1.0.0",
     "permission": [
@@ -77,12 +77,12 @@ define({ "api": [
     "examples": [
       {
         "title": "curl",
-        "content": "curl -X POST /api/account/create \\\n     -H \"Authorization: Bearer thisisjwttokenshouldbeonger\" \\\n     -d '{\"name\":\"Jhon Snow\", \"username\":\"i_know_nothing\"}'",
+        "content": "curl -X POST /api/v1/users \\\n     -H \"Authorization: Bearer thisisjwttokenshouldbeonger\" \\\n     -d '{\"name\":\"Jhon Snow\", \"username\":\"i_know_nothing\"}'",
         "type": "curl"
       },
       {
         "title": "node.js",
-        "content": "const axios = require('axios');\ntry {\n   const response = await axios({\n     method: 'POST',\n     url: '/api/account/create',\n     headers: {\n        'Authorization': 'Bearer thisisjwttokenshouldbeonger'\n     },\n     data: {\n       'name': 'Jhon Snow',\n       'username': 'i_know_nothing'\n     }\n  });\n  console.log('User created: ', response);\n} catch (error) {\n  console.error(error);\n}",
+        "content": "const axios = require('axios');\ntry {\n   const response = await axios({\n     method: 'POST',\n     url: '/api/v1/users',\n     headers: {\n        'Authorization': 'Bearer thisisjwttokenshouldbeonger'\n     },\n     data: {\n       'name': 'Jhon Snow',\n       'username': 'i_know_nothing'\n     }\n  });\n  console.log('User created: ', response);\n} catch (error) {\n  console.error(error);\n}",
         "type": "node.js"
       }
     ],
@@ -152,10 +152,10 @@ define({ "api": [
   },
   {
     "type": "DELETE",
-    "url": "/api/account/:id",
-    "title": "DELETE an account",
-    "name": "DELETE_an_account",
-    "description": "<p>An admin can delete account</p>",
+    "url": "/api/v1/users/:id",
+    "title": "DELETE a user",
+    "name": "DELETE_a_user",
+    "description": "<p>An admin can delete user</p>",
     "group": "User",
     "version": "1.0.0",
     "permission": [
@@ -186,12 +186,12 @@ define({ "api": [
     "examples": [
       {
         "title": "curl",
-        "content": "curl -X DELETE /api/account/5c444e1387e95374633c1e0d \\\n     -H \"Authorization: Bearer thisisjwttokenshouldbeonger\" \\",
+        "content": "curl -X DELETE /api/v1/users/5c444e1387e95374633c1e0d \\\n     -H \"Authorization: Bearer thisisjwttokenshouldbeonger\" \\",
         "type": "curl"
       },
       {
         "title": "node.js",
-        "content": "const axios = require('axios');\ntry {\n   const response = await axios({\n     method: 'DELETE',\n     url: '/api/account/5c444e1387e95374633c1e0d',\n     headers: {\n        'Authorization': 'Bearer thisisjwttokenshouldbeonger'\n     }\n  });\n  console.log('User created: ', response);\n} catch (error) {\n  console.error(error);\n}",
+        "content": "const axios = require('axios');\ntry {\n   const response = await axios({\n     method: 'DELETE',\n     url: '/api/v1/users/5c444e1387e95374633c1e0d',\n     headers: {\n        'Authorization': 'Bearer thisisjwttokenshouldbeonger'\n     }\n  });\n  console.log('User created: ', response);\n} catch (error) {\n  console.error(error);\n}",
         "type": "node.js"
       }
     ],
@@ -199,7 +199,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"message\": 'Successfuly deleted'\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  \"message\": 'Successfully deleted'\n}",
           "type": "json"
         }
       ]
@@ -219,7 +219,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "HTTP/1.1 404 Notfound\n{\n  message: \"No account found\"\n}",
+          "content": "HTTP/1.1 404 Notfound\n{\n  message: \"No user found\"\n}",
           "type": "json"
         }
       ]
@@ -229,10 +229,10 @@ define({ "api": [
   },
   {
     "type": "GET",
-    "url": "/api/account/:id",
-    "title": "Get an account",
-    "name": "Get_an_account",
-    "description": "<p>An admin can get an account</p>",
+    "url": "/api/v1/users/:id",
+    "title": "Get a user",
+    "name": "Get_a_user",
+    "description": "<p>An admin can view a user</p>",
     "group": "User",
     "version": "1.0.0",
     "permission": [
@@ -263,12 +263,12 @@ define({ "api": [
     "examples": [
       {
         "title": "curl",
-        "content": "curl -X GET /api/account/:id \\\n     -H \"Authorization: Bearer thisisjwttokenshouldbeonger\" \\",
+        "content": "curl -X GET /api/v1/users/:id \\\n     -H \"Authorization: Bearer thisisjwttokenshouldbeonger\" \\",
         "type": "curl"
       },
       {
         "title": "node.js",
-        "content": "const axios = require('axios');\ntry {\n   const response = await axios({\n     method: 'GET',\n     url: '/api/account/:id',\n     headers: {\n        'Authorization': 'Bearer thisisjwttokenshouldbeonger'\n     }\n  });\n  console.log('User created: ', response);\n} catch (error) {\n  console.error(error);\n}",
+        "content": "const axios = require('axios');\ntry {\n   const response = await axios({\n     method: 'GET',\n     url: '/api/v1/users/:id',\n     headers: {\n        'Authorization': 'Bearer thisisjwttokenshouldbeonger'\n     }\n  });\n  console.log('User created: ', response);\n} catch (error) {\n  console.error(error);\n}",
         "type": "node.js"
       }
     ],
@@ -287,7 +287,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "HTTP/1.1 404 Notfound\n{\n  message: \"No account found\"\n}",
+          "content": "HTTP/1.1 404 Notfound\n{\n  message: \"No user found\"\n}",
           "type": "json"
         }
       ]
@@ -339,10 +339,10 @@ define({ "api": [
   
   {
     "type": "PATCH",
-    "url": "/api/account/:id",
-    "title": "Patch Update an account",
-    "name": "Patch_Update_an_account",
-    "description": "<p>An admin can update account</p>",
+    "url": "/api/v1/users/:id",
+    "title": "Patch Update a User",
+    "name": "Patch_Update_a_user",
+    "description": "<p>An admin can update a user</p>",
     "group": "User",
     "version": "1.0.0",
     "permission": [
@@ -355,10 +355,10 @@ define({ "api": [
   },
   {
     "type": "PUT",
-    "url": "/api/account/:id",
-    "title": "Update an account",
-    "name": "Update_an_account",
-    "description": "<p>An admin can update account</p>",
+    "url": "/api/v1/users/:id",
+    "title": "Update a user",
+    "name": "Update_a_user",
+    "description": "<p>An admin can update a user</p>",
     "group": "User",
     "version": "1.0.0",
     "permission": [
@@ -414,12 +414,12 @@ define({ "api": [
     "examples": [
       {
         "title": "curl",
-        "content": "curl -X PUT /api/account/5c444e1387e95374633c1e0d \\\n     -H \"Authorization: Bearer thisisjwttokenshouldbeonger\" \\\n     -d '{\"name\":\"I am Snow\"}'",
+        "content": "curl -X PUT /api/v1/users/5c444e1387e95374633c1e0d \\\n     -H \"Authorization: Bearer thisisjwttokenshouldbeonger\" \\\n     -d '{\"name\":\"I am Snow\"}'",
         "type": "curl"
       },
       {
         "title": "node.js",
-        "content": "const axios = require('axios');\ntry {\n   const response = await axios({\n     method: 'PUT',\n     url: '/api/account/5c444e1387e95374633c1e0d',\n     headers: {\n        'Authorization': 'Bearer thisisjwttokenshouldbeonger'\n     },\n     data: {\n       'name': 'I am Snow'\n     }\n  });\n  console.log('User created: ', response);\n} catch (error) {\n  console.error(error);\n}",
+        "content": "const axios = require('axios');\ntry {\n   const response = await axios({\n     method: 'PUT',\n     url: '/api/v1/users/5c444e1387e95374633c1e0d',\n     headers: {\n        'Authorization': 'Bearer thisisjwttokenshouldbeonger'\n     },\n     data: {\n       'name': 'I am Snow'\n     }\n  });\n  console.log('User created: ', response);\n} catch (error) {\n  console.error(error);\n}",
         "type": "node.js"
       }
     ],
@@ -479,7 +479,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "HTTP/1.1 404 Notfound\n{\n  message: \"No account found\"\n}",
+          "content": "HTTP/1.1 404 Notfound\n{\n  message: \"No user found\"\n}",
           "type": "json"
         }
       ]
@@ -849,7 +849,7 @@ define({ "api": [
     "examples": [
       {
         "title": "curl",
-        "content": "curl -X POST /api/v1/auth/staff/login \\\n       -d '{\"email\":\"johndoe@gmail.com\", \"password\":\"i_know_nothing\"}'",
+        "content": "curl -X POST /api/v1/auth/staff/login \\\n   -d '{\"email\":\"johndoe@gmail.com\", \"password\":\"i_know_nothing\"}'",
         "type": "curl"
       },
       {

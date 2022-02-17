@@ -103,7 +103,8 @@
     {{#if template.withGenerator}}
     {{#if generator}}
       <div class="content">
-        {{__ "Generated with"}} <a href="{{{generator.url}}}">{{{generator.name}}}</a> {{{generator.version}}} - {{{generator.time}}}
+        {{__ "Created with 💙 by "}} <a href="{{{generator.url}}}">{{{generator.name}}}</a>. {{__ "Powered by "}} <a
+          href="{{{generator.apiDocsUrl}}}">{{{generator.apiDocsName}}}</a>.
       </div>
     {{/if}}
   {{/if}}
