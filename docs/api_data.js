@@ -1131,8 +1131,8 @@ define({ "api": [
   {
     "type": "GET",
     "url": "/api/v1/pipelines",
-    "title": "Get all pipelines",
-    "name": "Get_all_pipelines",
+    "title": "Get pipelines",
+    "name": "Get_pipelines",
     "description": "<p>A user can view pipelines</p>",
     "group": "Pipeline",
     "version": "1.0.0",
@@ -2280,8 +2280,8 @@ define({ "api": [
   {
     "type": "GET",
     "url": "/api/v1/contacts",
-    "title": "Get all contacts",
-    "name": "Get_all_contacts",
+    "title": "Get  contacts",
+    "name": "Get_contacts",
     "description": "<p>A user can view contacts</p>",
     "group": "Contact",
     "version": "1.0.0",
@@ -2645,5 +2645,674 @@ define({ "api": [
     },
     "filename": "examples/api.route.js",
     "groupTitle": "Contact"
+  },
+/** End Contacts */
+
+  /** Start Deals */
+
+   {
+    "type": "POST",
+    "url": "/api/v1/deals",
+    "title": "Create a deal",
+    "name": "Create_a_deal",
+    "description": "<p>A user can create a deal</p>",
+    "group": "Deal",
+    "version": "1.0.0",
+    "permission": [
+      {
+        "name": "POST-create-deal"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p> JWT key</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer thisisjwttokenshouldbeonger\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Body": [
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Deal name</p>"
+          },
+          {
+            "group": "Body",
+            "type": "ID",
+            "optional": false,
+            "field": "contact",
+            "description": "<p>Deal contact</p>"
+          },
+          
+          {
+            "group": "Body",
+            "type": "ID",
+            "optional": true,
+            "field": "assignee",
+            "description": "<p>Deal assignee</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "value",
+            "description": "<p>Deal value</p>"
+          },
+          
+          
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "curl",
+        "content": "curl -X POST /api/v1/deals \\\n     -H \"Authorization: Bearer thisisjwttokenshouldbeonger\" \\\n     -d '{\"name\":\"Another Deal\", \"contact\":\"f45253\", \"assignee\":\"e562772\", \"value\":\"34809087654\", \"notes\":\"Deal notes\"}'",
+        "type": "curl"
+      },
+      {
+        "title": "node.js",
+        "content": "const axios = require('axios');\ntry {\n   const response = await axios({\n     method: 'POST',\n     url: '/api/v1/deals',\n     headers: {\n        'Authorization': 'Bearer thisisjwttokenshouldbeonger'\n     },\n     data: {\n       'name': 'Deal name',\n  'contact': '677272dee',\n  'assignee': '6272edd',\n  'value': '99020',\n  'notes': 'yet another notes'\n }\n  });\n  console.log('Deal created: ', response);\n} catch (error) {\n  console.error(error);\n}",
+        "type": "node.js"
+      }
+    ],
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "Object",
+            "optional": false,
+            "field": "error",
+            "description": "<p>Error response</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 BadRequest\n{\n  message: \"Bad request\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "examples/api.route.js",
+    "groupTitle": "Deal",
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>Deal Id</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Deal name</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "value",
+            "description": "<p>Deal value</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "contact",
+            "description": "<p>Contact ID</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "assignee",
+            "description": "<p>Deal assignee</p>"
+          },
+          
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "notes",
+            "description": "<p>Deal notes</p>"
+          },
+          
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"id\": '5c444e1387e95374633c1e0d',\n  \"name\": \"This deal\",\n  \"value\": \"30030939\",\n  \"contact\": \"f0093003\",\n  \"assignee\": \"ef62727\",\n    \"notes\": \"this notes\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+
+
+   {
+    "type": "PUT",
+    "url": "/api/v1/deals/:id",
+    "title": "Update deal",
+    "name": "Update_deal",
+    "description": "<p>An admin can update a deal</p>",
+    "group": "Deal",
+    "version": "1.0.0",
+    "permission": [
+      {
+        "name": "PUT-update-deal"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p> JWT key</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer thisisjwttokenshouldbeonger\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Body": [
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": true,
+            "field": "name",
+            "description": "<p>Deal name</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            
+            "optional": true,
+            "field": "value",
+            "description": "<p>Deal Value</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            
+            "optional": true,
+            "field": "contact",
+            "description": "<p>Deal Contact</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": true,
+            "field": "assignee",
+            "description": "<p>Deal Assignee</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": true,
+            "field": "notes",
+            "description": "<p>Deal Notes</p>"
+          },
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "curl",
+        "content": "curl -X PUT /api/v1/deals/5c444e1387e95374633c1e0d \\\n     -H \"Authorization: Bearer thisisjwttokenshouldbeonger\" \\\n     -d '{\"name\":\"New Deal Name\"}'",
+        "type": "curl"
+      },
+      {
+        "title": "node.js",
+        "content": "const axios = require('axios');\ntry {\n   const response = await axios({\n     method: 'PUT',\n     url: '/api/v1/deals/5c444e1387e95374633c1e0d',\n     headers: {\n        'Authorization': 'Bearer thisisjwttokenshouldbeonger'\n     },\n     data: {\n       'name': 'New Deal name'\n     }\n  });\n  console.log('Deal updated: ', response);\n} catch (error) {\n  console.error(error);\n}",
+        "type": "node.js"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"id\": '5c444e1387e95374633c1e0d',\n  \"name\": \"New deal name\",\n  \"value\": \"829020200\",\n  \"assignee\": \" fe52562\",\n  \"contact\": \" fe525623ee\",\n  \"notes\": \" Another notes\" \n}",
+          "type": "json"
+        }
+      ],
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>Deal Id</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Deal name</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "value",
+            "description": "<p>Deal value</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "contact",
+            "description": "<p>Contact ID</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "assignee",
+            "description": "<p>Deal assignee</p>"
+          },
+          
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "notes",
+            "description": "<p>Deal notes</p>"
+          },
+          
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "Object",
+            "optional": false,
+            "field": "error",
+            "description": "<p>Error response</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Notfound\n{\n  message: \"No deal found\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "examples/api.route.js",
+    "groupTitle": "Deal"
+  },
+
+
+   
+{
+    "type": "GET",
+    "url": "/api/v1/deals",
+    "title": "Get  deals",
+    "name": "Get_deals",
+    "description": "<p>A user can view deals</p>",
+    "group": "Deal",
+    "version": "1.0.0",
+    "permission": [
+      {
+        "name": "GET-view-deal"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p> JWT key</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer thisisjwttokenshouldbeonger\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "curl",
+        "content": "curl -X GET /api/v1/deals \\\n     -H \"Authorization: Bearer thisisjwttokenshouldbeonger\" \\",
+        "type": "curl"
+      },
+      {
+        "title": "node.js",
+        "content": "const axios = require('axios');\ntry {\n   const response = await axios({\n     method: 'GET',\n     url: '/api/v1/deals',\n     headers: {\n        'Authorization': 'Bearer thisisjwttokenshouldbeonger'\n     }\n  });\n  console.log('User created: ', response);\n} catch (error) {\n  console.error(error);\n}",
+        "type": "node.js"
+      }
+    ],
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "Object",
+            "optional": false,
+            "field": "error",
+            "description": "<p>Error response</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Notfound\n{\n  userMessage: \"Oops... Something went wrong, contact the admin...\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "examples/api.route.js",
+    "groupTitle": "Deal",
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>Deal Id</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Deal name</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "value",
+            "description": "<p>Deal value</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "contact",
+            "description": "<p>Contact ID</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "assignee",
+            "description": "<p>Deal assignee</p>"
+          },
+          
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "notes",
+            "description": "<p>Deal notes</p>"
+          },
+          
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n \"data\":\"[{\n  \"id\": '5c444e1387e95374633c1e0d',\n  \"name\": \"Deal name\",\n  \"value\": \"562662\",\n \"contact\": \"e0093003\",\n  \"assignee\": \"ef62727\",\n  \"notes\": \"Deal notes\"\n}]\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+
+
+  {
+    "type": "GET",
+    "url": "/api/v1/deals/:id",
+    "title": "View deal",
+    "name": "View_deal",
+    "description": "<p>A user can view deal</p>",
+    "group": "Deal",
+    "version": "1.0.0",
+    "permission": [
+      {
+        "name": "GET-view-deal"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p> JWT key</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer thisisjwttokenshouldbeonger\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "curl",
+        "content": "curl -X GET /api/v1/deals/:id \\\n     -H \"Authorization: Bearer thisisjwttokenshouldbeonger\" \\",
+        "type": "curl"
+      },
+      {
+        "title": "node.js",
+        "content": "const axios = require('axios');\ntry {\n   const response = await axios({\n     method: 'GET',\n     url: '/api/v1/deals/:id',\n     headers: {\n        'Authorization': 'Bearer thisisjwttokenshouldbeonger'\n     }\n  });\n  console.log('User created: ', response);\n} catch (error) {\n  console.error(error);\n}",
+        "type": "node.js"
+      }
+    ],
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "Object",
+            "optional": false,
+            "field": "error",
+            "description": "<p>Error response</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Notfound\n{\n  userMessage: \"Deal not found\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "examples/api.route.js",
+    "groupTitle": "Deal",
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>Deal Id</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Deal name</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "value",
+            "description": "<p>Deal value</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "contact",
+            "description": "<p>Contact ID</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "assignee",
+            "description": "<p>Deal assignee</p>"
+          },
+          
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "notes",
+            "description": "<p>Deal notes</p>"
+          },
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n \"data\":\"{\n  \"id\": '5c444e1387e95374633c1e0d',\n  \"name\": \"Deal name\",\n  \"value\": \"562662\",\n \"assignee\": \"f0093003ee\",\n  \"contact\": \"ef62727\",\n  \"notes\": \"Deal notes\"\n}\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  
+
+  {
+    "type": "DELETE",
+    "url": "/api/v1/deals/:id",
+    "title": "Delete deal",
+    "name": "Delete_deal",
+    "description": "<p>A user can delete deal</p>",
+    "group": "Deal",
+    "version": "1.0.0",
+    "permission": [
+      {
+        "name": "DELETE-delete-deal"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>JWT key</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer thisisjwttokenshouldbeonger\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "curl",
+        "content": "curl -X DELETE /api/v1/deals/5c444e1387e95374633c1e0d \\\n     -H \"Authorization: Bearer thisisjwttokenshouldbeonger\" \\",
+        "type": "curl"
+      },
+      {
+        "title": "node.js",
+        "content": "const axios = require('axios');\ntry {\n   const response = await axios({\n     method: 'DELETE',\n     url: '/api/v1/deals/5c444e1387e95374633c1e0d',\n     headers: {\n        'Authorization': 'Bearer thisisjwttokenshouldbeonger'\n     }\n  });\n  console.log('User created: ', response);\n} catch (error) {\n  console.error(error);\n}",
+        "type": "node.js"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"message\": 'Successfully deleted'\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "Object",
+            "optional": false,
+            "field": "error",
+            "description": "<p>Error response</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Notfound\n{\n  message: \"No deal found\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "examples/api.route.js",
+    "groupTitle": "Deal"
   },
 ] });
