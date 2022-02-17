@@ -3,8 +3,8 @@ define({ "api": [
   {
     "type": "POST",
     "url": "/api/v1/users",
-    "title": "Create an user",
-    "name": "Create_an_user",
+    "title": "Create a user",
+    "name": "Create_a_user",
     "description": "<p>An admin can create a user</p>",
     "group": "User",
     "version": "1.0.0",
@@ -153,14 +153,14 @@ define({ "api": [
   {
     "type": "DELETE",
     "url": "/api/v1/users/:id",
-    "title": "DELETE a user",
-    "name": "DELETE_a_user",
+    "title": "Delete a user",
+    "name": "Delete_a_user",
     "description": "<p>An admin can delete user</p>",
     "group": "User",
     "version": "1.0.0",
     "permission": [
       {
-        "name": "DELETE-deleteUser"
+        "name": "DELETE-delete-user"
       }
     ],
     "header": {
@@ -171,7 +171,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "Authorization",
-            "description": "<p>Admin JWT key</p>"
+            "description": "<p>JWT key</p>"
           }
         ]
       },
@@ -1648,8 +1648,8 @@ define({ "api": [
    {
     "type": "DELETE",
     "url": "/api/v1/pipelines/:id",
-    "title": "DELETE a pipeline",
-    "name": "DELETE_a_pipeline",
+    "title": "Delete a pipeline",
+    "name": "Delete_a_pipeline",
     "description": "<p>A user can delete a pipeline</p>",
     "group": "Pipeline",
     "version": "1.0.0",
@@ -1855,5 +1855,795 @@ define({ "api": [
     "filename": "examples/api.route.js",
     "groupTitle": "Pipeline"
   },
-   
+
+
+
+   {
+    "type": "POST",
+    "url": "/api/v1/contacts",
+    "title": "Create a contact",
+    "name": "Create_a_contact",
+    "description": "<p>A user can create a contact</p>",
+    "group": "Contact",
+    "version": "1.0.0",
+    "permission": [
+      {
+        "name": "POST-create-contact"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p> JWT key</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer thisisjwttokenshouldbeonger\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Body": [
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Contact full name</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Contact email address</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": true,
+            "field": "phone",
+            "description": "<p>Contact phone number</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": true,
+            "field": "mobile",
+            "description": "<p>Contact mobile number</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": true,
+            "field": "company",
+            "description": "<p>Contact company</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": true,
+            "field": "type",
+            "description": "<p>Contact type</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": true,
+            "field": "avatar",
+            "description": "<p>Contact avatar</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": true,
+            "field": "notes",
+            "description": "<p>Contact notes</p>"
+          },
+          
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "curl",
+        "content": "curl -X POST /api/v1/contacts \\\n     -H \"Authorization: Bearer thisisjwttokenshouldbeonger\" \\\n     -d '{\"name\":\"David Snow\", \"email\":\"davidsnow@gmail.com\", \"phone\":\"+234809087654\", \"mobile\":\"+234809087654\", \"company\":\"fed45afee\", \"type\":\"personal\", \"avatar\":\"https://avatars0.githubusercontent.com/u/1234?s=460&v=4\", \"notes\":\"Contact notes\"}'",
+        "type": "curl"
+      },
+      {
+        "title": "node.js",
+        "content": "const axios = require('axios');\ntry {\n   const response = await axios({\n     method: 'POST',\n     url: '/api/v1/contacts',\n     headers: {\n        'Authorization': 'Bearer thisisjwttokenshouldbeonger'\n     },\n     data: {\n       'name': 'David Snow',\n  'email': 'davidsnow@example.com',\n  'phone': '+5772882',\n  'mobile': '99020',\n  'company': 'ef41561ed',\n  'type': 'another type',\n  'avatar': 'namam.png',\n  'notes': 'yet another notes'\n }\n  });\n  console.log('Contact created: ', response);\n} catch (error) {\n  console.error(error);\n}",
+        "type": "node.js"
+      }
+    ],
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "Object",
+            "optional": false,
+            "field": "error",
+            "description": "<p>Error response</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 409 Conflict\n{\n  message: \"Contact already exists\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "examples/api.route.js",
+    "groupTitle": "Contact",
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Contact Id</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Contact full name</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "phone",
+            "description": "<p>Contact phone number</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "mobile",
+            "description": "<p>Contact mobile number</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Contact Email</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "company",
+            "description": "<p>Company this contact belongs to</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "type",
+            "description": "<p>Contact type</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "notes",
+            "description": "<p>Contact notes</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "avatar",
+            "description": "<p>Contact avatar</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"id\": '5c444e1387e95374633c1e0d',\n  \"name\": \"David Snow\",\n  \"mobile\": \"+030030939\",\n  \"phone\": \"+0093003\",\n  \"company\": \"ef62727\",\n  \"type\": \"User\",\n  \"email\": \"davidsnow@example.com\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+
+
+
+   {
+    "type": "PATCH",
+    "url": "/api/v1/contacts/:id",
+    "title": "Update a contact",
+    "name": "Update_a_contact",
+    "description": "<p>A user can update a contact</p>",
+    "group": "Contact",
+    "version": "1.0.0",
+    "permission": [
+      {
+        "name": "PATCH-update-contact"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p> JWT key</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer thisisjwttokenshouldbeonger\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Body": [
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": true,
+            "field": "name",
+            "description": "<p>Contact full name</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": true,
+            "field": "email",
+            "description": "<p>Contact email address</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": true,
+            "field": "phone",
+            "description": "<p>Contact phone number</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": true,
+            "field": "mobile",
+            "description": "<p>Contact mobile number</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": true,
+            "field": "company",
+            "description": "<p>Contact company</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": true,
+            "field": "type",
+            "description": "<p>Contact type</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": true,
+            "field": "avatar",
+            "description": "<p>Contact avatar</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": true,
+            "field": "notes",
+            "description": "<p>Contact notes</p>"
+          },
+          
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "curl",
+        "content": "curl -X PATCH /api/v1/contacts \\\n     -H \"Authorization: Bearer thisisjwttokenshouldbeonger\" \\\n     -d '{\"name\":\"David Snow\", \"email\":\"davidsnow@gmail.com\", \"phone\":\"+234809087654\", \"mobile\":\"+234809087654\", \"company\":\"fed45afee\", \"type\":\"personal\", \"avatar\":\"https://avatars0.githubusercontent.com/u/1234?s=460&v=4\", \"notes\":\"Contact notes\"}'",
+        "type": "curl"
+      },
+      {
+        "title": "node.js",
+        "content": "const axios = require('axios');\ntry {\n   const response = await axios({\n     method: 'PATCH',\n     url: '/api/v1/contacts/:id',\n     headers: {\n        'Authorization': 'Bearer thisisjwttokenshouldbeonger'\n     },\n     data: {\n       'name': 'David Snow',\n  'email': 'davidsnow@example.com',\n  'phone': '+5772882',\n  'mobile': '99020',\n  'company': 'ef41561ed',\n  'type': 'another type',\n  'avatar': 'namam.png',\n  'notes': 'yet another notes'\n }\n  });\n  console.log('Contact updated: ', response);\n} catch (error) {\n  console.error(error);\n}",
+        "type": "node.js"
+      }
+    ],
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "Object",
+            "optional": false,
+            "field": "error",
+            "description": "<p>Error response</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Notfound\n{\n  message: \"Contact not found\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "examples/api.route.js",
+    "groupTitle": "Contact",
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Contact Id</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Contact full name</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "phone",
+            "description": "<p>Contact phone number</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "mobile",
+            "description": "<p>Contact mobile number</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Contact Email</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "company",
+            "description": "<p>Company this contact belongs to</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "type",
+            "description": "<p>Contact type</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "notes",
+            "description": "<p>Contact notes</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "avatar",
+            "description": "<p>Contact avatar</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"id\": '5c444e1387e95374633c1e0d',\n  \"name\": \"David Snow\",\n  \"mobile\": \"+030030939\",\n  \"phone\": \"+0093003\",\n  \"company\": \"ef62727\",\n  \"type\": \"User\",\n  \"email\": \"davidsnow@example.com\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+
+
+  {
+    "type": "GET",
+    "url": "/api/v1/contacts",
+    "title": "Get all contacts",
+    "name": "Get_all_contacts",
+    "description": "<p>A user can view contacts</p>",
+    "group": "Contact",
+    "version": "1.0.0",
+    "permission": [
+      {
+        "name": "GET-view-contact"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p> JWT key</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer thisisjwttokenshouldbeonger\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "curl",
+        "content": "curl -X GET /api/v1/contacts \\\n     -H \"Authorization: Bearer thisisjwttokenshouldbeonger\" \\",
+        "type": "curl"
+      },
+      {
+        "title": "node.js",
+        "content": "const axios = require('axios');\ntry {\n   const response = await axios({\n     method: 'GET',\n     url: '/api/v1/contacts',\n     headers: {\n        'Authorization': 'Bearer thisisjwttokenshouldbeonger'\n     }\n  });\n  console.log('User created: ', response);\n} catch (error) {\n  console.error(error);\n}",
+        "type": "node.js"
+      }
+    ],
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "Object",
+            "optional": false,
+            "field": "error",
+            "description": "<p>Error response</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Notfound\n{\n  userMessage: \"Oops... Something went wrong, contact the admin...\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "examples/api.route.js",
+    "groupTitle": "Contact",
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Contact Id</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Contact full name</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "phone",
+            "description": "<p>Contact phone number</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "mobile",
+            "description": "<p>Contact mobile number</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Contact Email</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "company",
+            "description": "<p>Company this contact belongs to</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "type",
+            "description": "<p>Contact type</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "notes",
+            "description": "<p>Contact notes</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "avatar",
+            "description": "<p>Contact avatar</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n \"data\":\"[{\n  \"id\": '5c444e1387e95374633c1e0d',\n  \"name\": \"Contact name\",\n  \"mobile\": \"+562662\",\n \"phone\": \"+0093003\",\n  \"company\": \"ef62727\",\n  \"type\": \"User\",\n  \"email\":\" davidsnow@example.com \",\n  \"notes\": \"Contact notes\"\n}]\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  
+ {
+    "type": "GET",
+    "url": "/api/v1/contacts/:id",
+    "title": "View contact",
+    "name": "View_contact",
+    "description": "<p>A user can view contact</p>",
+    "group": "Contact",
+    "version": "1.0.0",
+    "permission": [
+      {
+        "name": "GET-view-contact"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p> JWT key</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer thisisjwttokenshouldbeonger\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "curl",
+        "content": "curl -X GET /api/v1/contacts/:id \\\n     -H \"Authorization: Bearer thisisjwttokenshouldbeonger\" \\",
+        "type": "curl"
+      },
+      {
+        "title": "node.js",
+        "content": "const axios = require('axios');\ntry {\n   const response = await axios({\n     method: 'GET',\n     url: '/api/v1/contacts/:id',\n     headers: {\n        'Authorization': 'Bearer thisisjwttokenshouldbeonger'\n     }\n  });\n  console.log('User created: ', response);\n} catch (error) {\n  console.error(error);\n}",
+        "type": "node.js"
+      }
+    ],
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "Object",
+            "optional": false,
+            "field": "error",
+            "description": "<p>Error response</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Notfound\n{\n  userMessage: \"Contact not found\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "examples/api.route.js",
+    "groupTitle": "Contact",
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Contact Id</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Contact full name</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "phone",
+            "description": "<p>Contact phone number</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "mobile",
+            "description": "<p>Contact mobile number</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Contact Email</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "company",
+            "description": "<p>Company this contact belongs to</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "type",
+            "description": "<p>Contact type</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "notes",
+            "description": "<p>Contact notes</p>"
+          },
+          {
+            "group": "200",
+            "type": "String",
+            "optional": true,
+            "field": "avatar",
+            "description": "<p>Contact avatar</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n \"data\":\"{\n  \"id\": '5c444e1387e95374633c1e0d',\n  \"name\": \"Contact name\",\n  \"mobile\": \"+562662\",\n \"phone\": \"+0093003\",\n  \"company\": \"ef62727\",\n  \"type\": \"User\",\n  \"email\":\" davidsnow@example.com \",\n  \"notes\": \"Contact notes\"\n}\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+
+
+
+  {
+    "type": "DELETE",
+    "url": "/api/v1/contacts/:id",
+    "title": "Delete a contact",
+    "name": "Delete_a_contact",
+    "description": "<p>A user can delete contact</p>",
+    "group": "Contact",
+    "version": "1.0.0",
+    "permission": [
+      {
+        "name": "DELETE-delete-contact"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p> JWT key</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer thisisjwttokenshouldbeonger\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "curl",
+        "content": "curl -X DELETE /api/v1/contacts/5c444e1387e95374633c1e0d \\\n     -H \"Authorization: Bearer thisisjwttokenshouldbeonger\" \\",
+        "type": "curl"
+      },
+      {
+        "title": "node.js",
+        "content": "const axios = require('axios');\ntry {\n   const response = await axios({\n     method: 'DELETE',\n     url: '/api/v1/contacts/5c444e1387e95374633c1e0d',\n     headers: {\n        'Authorization': 'Bearer thisisjwttokenshouldbeonger'\n     }\n  });\n  console.log('User created: ', response);\n} catch (error) {\n  console.error(error);\n}",
+        "type": "node.js"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"message\": 'Successfully deleted'\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "Object",
+            "optional": false,
+            "field": "error",
+            "description": "<p>Error response</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Notfound\n{\n  message: \"No contact found\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "examples/api.route.js",
+    "groupTitle": "Contact"
+  },
 ] });
