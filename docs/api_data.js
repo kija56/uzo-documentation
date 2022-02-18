@@ -917,12 +917,11 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "password",
-            "description": "<p>New password/p>"
+            "description": "<p>New password</p>"
           },
           {
             "group": "Body",
             "type": "String",
-            "size": "6..20",
             "optional": false,
             "field": "oldPassword",
             "description": "<p>Old User Password</p>"
