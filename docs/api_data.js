@@ -1397,14 +1397,14 @@ define({ "api": [
             "group": "Body",
             "type": "String",
             "optional": false,
-            "field": "fromStage",
+            "field": "fromStageId",
             "description": "<p>Deal initial stage</p>"
           },
           {
             "group": "Body",
             "type": "String",
             "optional": false,
-            "field": "toStage",
+            "field": "toStageId",
             "description": "<p>Target stage</p>"
           },
           
@@ -1414,12 +1414,12 @@ define({ "api": [
     "examples": [
       {
         "title": "curl",
-        "content": "curl -X PATCH /api/v1/pipelines/:id/move-stage \\\n     -H \"Authorization: Bearer thisisjwttokenshouldbeonger\" \\\n     -d '{\"dealId\":\"890efde442\", \"fromStage\":\"8fe826ed\", \"toStage\":\"8fe826ed\"}'",
+        "content": "curl -X PATCH /api/v1/pipelines/:id/move-stage \\\n     -H \"Authorization: Bearer thisisjwttokenshouldbeonger\" \\\n     -d '{\"dealId\":\"890efde442\", \"fromStageId\":\"8fe826ed\", \"toStageId\":\"8fe826ed\"}'",
         "type": "curl"
       },
       {
         "title": "node.js",
-        "content": "const axios = require('axios');\ntry {\n   const response = await axios({\n     method: 'POST',\n     url: '/api/v1/pipelines',\n     headers: {\n        'Authorization': 'Bearer thisisjwttokenshouldbeonger'\n     },\n     data: {\n       'dealId': '890efde442',\n 'fromStage': '6a890efde442',\n 'toStage:'890efde442fed'     }\n  });\n  console.log('Deal moved: ', response);\n} catch (error) {\n  console.error(error);\n}",
+        "content": "const axios = require('axios');\ntry {\n   const response = await axios({\n     method: 'POST',\n     url: '/api/v1/pipelines',\n     headers: {\n        'Authorization': 'Bearer thisisjwttokenshouldbeonger'\n     },\n     data: {\n       'dealId': '890efde442',\n 'fromStageId': '6a890efde442',\n 'toStageId:'890efde442fed'     }\n  });\n  console.log('Deal moved: ', response);\n} catch (error) {\n  console.error(error);\n}",
         "type": "node.js"
       }
     ],
